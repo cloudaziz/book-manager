@@ -1,0 +1,17 @@
+{
+  "name": "cloudaziz/book-manager",
+  "description": "A WordPress CRUD Plugin built to learn WordPress Core.",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "autoload": {
+    "psr-4": {
+      "BookManager\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Md Abdul Aziz"
+    }
+  ],
+  "require": {}
+}
