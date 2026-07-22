@@ -4,10 +4,11 @@ namespace BookManager;
 class Database {
 
     public static function activate() {
-        self::create_tables();
+        self::create_table();
+        self::insert_book();
     }
 
-    private static function create_tables() {
+    private static function create_table(): void {
 
         global $wpdb;
 
@@ -29,6 +30,32 @@ class Database {
 
         add_option('book_manager_db_version', '0.0.4');
 
+    }
+
+    public static function insert_book(): int | false {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . 'book_manager_books';
+
+        $result = $wpdb->insert(
+            $table_name,
+            [
+                'title'      => 'Clean Code',
+                'author'     => 'Robert C. Martin',
+                'created_at' => current_time('mysql'),
+            ],
+            [
+                '%s',
+                '%s',
+                '%s',
+            ]
+        );
+
+        if (false === $result) {
+            return false;
+        }
+
+        return (int) $wpdb->insert_id;
     }
 
 }

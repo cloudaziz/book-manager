@@ -14,7 +14,10 @@ class Plugin {
      * Runs once when the plugin is activated.
      */
     public function activate(): void {
+
         error_log(__METHOD__);
+
+        Database::activate();
     }
 
     /**

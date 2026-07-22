@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Book Manager
  * Description: A WordPress CRUD Plugin built to learn WordPress Core.
- * Version: 0.0.2
+ * Version: 0.0.5
  */
 
 if (! defined('ABSPATH')) {
