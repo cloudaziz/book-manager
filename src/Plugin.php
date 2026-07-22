@@ -15,9 +15,6 @@ class Plugin {
      */
     public function activate(): void {
         error_log(__METHOD__);
-
-        $database = new Database();
-        $database->create_tables();
     }
 
     /**
