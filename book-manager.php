@@ -11,6 +11,10 @@ if (! defined('ABSPATH')) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+define('BOOK_MANAGER_PATH', plugin_dir_path(__FILE__));
+define('BOOK_MANAGER_URL', plugin_dir_url(__FILE__));
+define('BOOK_MANAGER_FILE', __FILE__);
+
 use BookManager\Plugin;
 
 $plugin = new Plugin();

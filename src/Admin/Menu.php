@@ -19,7 +19,10 @@ class Menu {
             'manage_options',
             'book-manager',
             [$this, 'render'],
-            'dashicons-book',
+            plugins_url(
+                'assets/images/icon.png',
+                BOOK_MANAGER_FILE
+            ),
             65
         );
     }
