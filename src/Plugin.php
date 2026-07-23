@@ -1,6 +1,12 @@
 <?php
 namespace BookManager;
 
+use BookManager\Admin\Menu;
+
+if (! defined('ABSPATH')) {
+    exit;
+}
+
 class Plugin {
 
     /**
@@ -8,6 +14,8 @@ class Plugin {
      */
     public function run(): void {
         error_log(__METHOD__);
+
+        new Menu();
     }
 
     /**
