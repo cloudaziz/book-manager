@@ -20,12 +20,12 @@ use BookManager\Plugin;
 $plugin = new Plugin();
 
 register_activation_hook(
-    __FILE__,
+    BOOK_MANAGER_FILE,
     [$plugin, 'activate']
 );
 
 register_deactivation_hook(
-    __FILE__,
+    BOOK_MANAGER_FILE,
     [$plugin, 'deactivate']
 );
 
