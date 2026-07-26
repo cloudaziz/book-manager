@@ -1,33 +1,45 @@
 <?php
 namespace BookManager\Admin;
 
-if (! defined('ABSPATH')) {
-    exit;
-}
-
+/**
+ * Handles the registration of WordPress admin menus.
+ */
 class Menu {
-
-    public function __construct() {
-        add_action('admin_menu', [$this, 'register']);
+    /**
+     * Register all admin-related hooks.
+     *
+     * @return void
+     */
+    public function register(): void {
+        add_action('admin_menu', [$this, 'register_menu']);
     }
 
-    public function register(): void {
-        // error_log('Menu::register() called');
+    /**
+     * Register the Book Manager admin menu.
+     *
+     * @return void
+     */
+    public function register_menu(): void {
         add_menu_page(
             'Book Manager',
             'Book Manager',
             'manage_options',
             'book-manager',
-            [$this, 'render'],
-            plugins_url(
-                'assets/images/icon.png',
-                BOOK_MANAGER_FILE
-            ),
-            65
+            [$this, 'render_page'],
+            'dashicons-book',
+            25
         );
     }
 
-    public function render(): void {
+    /**
+     * Render the Book Manager admin page.
+     *
+     * @return void
+     */
+    public function render_page(): void {
+        echo '<div class="wrap">';
         echo '<h1>Book Manager</h1>';
+        echo '<p>Welcome to Book Manager Plugin.</p>';
+        echo '</div>';
     }
 }
