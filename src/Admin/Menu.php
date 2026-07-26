@@ -20,26 +20,16 @@ class Menu {
      * @return void
      */
     public function register_menu(): void {
+        $page = new BooksPage();
+
         add_menu_page(
             'Book Manager',
             'Book Manager',
             'manage_options',
             'book-manager',
-            [$this, 'render_page'],
+            [$page, 'render'],
             'dashicons-book',
             25
         );
-    }
-
-    /**
-     * Render the Book Manager admin page.
-     *
-     * @return void
-     */
-    public function render_page(): void {
-        echo '<div class="wrap">';
-        echo '<h1>Book Manager</h1>';
-        echo '<p>Welcome to Book Manager Plugin.</p>';
-        echo '</div>';
     }
 }
