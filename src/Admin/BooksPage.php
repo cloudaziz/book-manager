@@ -11,6 +11,9 @@
      * @return void
      */
     public function render(): void {
+        $table = new BooksTable();
+
+        $table->prepare_items();
         ?>
 <div class="wrap">
     <h1 class="wp-heading-inline">Book Manager</h1>
@@ -21,7 +24,7 @@
 
     <hr class="wp-header-end">
 
-    <p>Welcome to Book Manager Plugin.</p>
+    <?php $table->display(); ?>
 </div>
 <?php
 }
