@@ -53,9 +53,18 @@
             </tbody>
         </table>
 
+        <input type="hidden" name="action" value="book_manager_store_book">
+
         <?php submit_button('Save Book'); ?>
 
     </form>
+    <?php
+        if (! empty($_POST)) {
+                    echo '<pre>';
+                    print_r($_POST);
+                    echo '</pre>';
+                }
+            ?>
 </div>
 <?php
 }
