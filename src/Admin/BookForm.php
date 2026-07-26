@@ -6,14 +6,48 @@
  */
     class BookForm {
     /**
+     * Validation errors.
+     *
+     * @var array
+     */
+    private array $errors;
+
+    /**
+     * Constructor.
+     *
+     * @param array $errors Validation errors.
+     */
+    public function __construct(array $errors = []) {
+        $this->errors = $errors;
+    }
+
+    /**
      * Render the add new book form.
      *
      * @return void
      */
     public function render(): void {
         ?>
+
 <div class="wrap">
+
     <h1>Add New Book</h1>
+
+    <?php if (! empty($this->errors)): ?>
+
+    <div class="notice notice-error">
+        <ul>
+
+            <?php foreach ($this->errors as $error): ?>
+
+            <li><?php echo esc_html($error); ?></li>
+
+            <?php endforeach; ?>
+
+        </ul>
+    </div>
+
+    <?php endif; ?>
 
     <form method="post">
 
@@ -60,14 +94,9 @@
         <?php submit_button('Save Book'); ?>
 
     </form>
-    <?php
-        if (! empty($_POST)) {
-                    echo '<pre>';
-                    print_r($_POST);
-                    echo '</pre>';
-                }
-            ?>
+
 </div>
+
 <?php
 }
 }
