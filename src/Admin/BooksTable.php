@@ -4,6 +4,7 @@ namespace BookManager\Admin;
 if (! class_exists('WP_List_Table')) {
     require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
+use BookManager\Database;
 
 /**
  * Handles the Book Manager list table.
@@ -37,23 +38,7 @@ class BooksTable extends \WP_List_Table {
             [],
         ];
 
-        $this->items = [
-            [
-                'title'  => 'The Hobbit',
-                'author' => 'J. R. R. Tolkien',
-                'year'   => '1937',
-            ],
-            [
-                'title'  => 'Clean Code',
-                'author' => 'Robert C. Martin',
-                'year'   => '2008',
-            ],
-            [
-                'title'  => 'The Pragmatic Programmer',
-                'author' => 'Andrew Hunt',
-                'year'   => '1999',
-            ],
-        ];
+        $this->items = Database::get_books();
     }
 
     /**
@@ -63,9 +48,9 @@ class BooksTable extends \WP_List_Table {
      */
     public function get_columns(): array {
         return [
-            'title'  => 'Title',
-            'author' => 'Author',
-            'year'   => 'Year',
+            'title'      => 'Title',
+            'author'     => 'Author',
+            'created_at' => 'Year',
         ];
     }
 

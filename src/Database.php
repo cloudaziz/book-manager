@@ -58,4 +58,22 @@ class Database {
         return (int) $wpdb->insert_id;
     }
 
+    /**
+     * Retrieve all books from the database.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public static function get_books(): array {
+        global $wpdb;
+
+        $table = $wpdb->prefix . 'book_manager_books';
+
+        $books = $wpdb->get_results(
+            "SELECT * FROM {$table} ORDER BY id DESC",
+            ARRAY_A
+        );
+
+        return $books;
+    }
+
 }
