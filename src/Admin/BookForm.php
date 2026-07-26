@@ -55,6 +55,8 @@
 
         <input type="hidden" name="action" value="book_manager_store_book">
 
+        <?php wp_nonce_field('book_manager_store_book'); ?>
+
         <?php submit_button('Save Book'); ?>
 
     </form>
