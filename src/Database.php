@@ -2,14 +2,21 @@
 namespace BookManager;
 
 class Database {
-
-    public static function activate() {
+    /**
+     * Run on plugin activation.
+     *
+     * @return void
+     */
+    public static function activate(): void {
         self::create_table();
-        self::insert_book();
     }
 
+    /**
+     * Create the books table.
+     *
+     * @return void
+     */
     private static function create_table(): void {
-
         global $wpdb;
 
         $table_name = $wpdb->prefix . 'book_manager_books';
@@ -22,17 +29,33 @@ class Database {
             id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
             title VARCHAR(255) NOT NULL,
             author VARCHAR(255) NOT NULL,
+            year SMALLINT UNSIGNED NOT NULL,
             created_at DATETIME NOT NULL,
             PRIMARY KEY (id)
         ) {$charset_collate};";
 
         dbDelta($sql);
 
-        add_option('book_manager_db_version', '0.0.4');
-
+        update_option(
+            'book_manager_db_version',
+            '0.1.2'
+        );
     }
 
-    public static function insert_book(): int | false {
+    /**
+     * Insert a new book.
+     *
+     * @param string $title  Book title.
+     * @param string $author Book author.
+     * @param int    $year   Publication year.
+     *
+     * @return int|false
+     */
+    public static function insert_book(
+        string $title,
+        string $author,
+        int $year
+    ): int | false {
         global $wpdb;
 
         $table_name = $wpdb->prefix . 'book_manager_books';
@@ -40,18 +63,20 @@ class Database {
         $result = $wpdb->insert(
             $table_name,
             [
-                'title'      => 'Clean Code',
-                'author'     => 'Robert C. Martin',
+                'title'      => $title,
+                'author'     => $author,
+                'year'       => $year,
                 'created_at' => current_time('mysql'),
             ],
             [
                 '%s',
                 '%s',
+                '%d',
                 '%s',
             ]
         );
 
-        if (false === $result) {
+        if ($result === false) {
             return false;
         }
 
@@ -59,21 +84,18 @@ class Database {
     }
 
     /**
-     * Retrieve all books from the database.
+     * Retrieve all books.
      *
      * @return array<int, array<string, mixed>>
      */
     public static function get_books(): array {
         global $wpdb;
 
-        $table = $wpdb->prefix . 'book_manager_books';
+        $table_name = $wpdb->prefix . 'book_manager_books';
 
-        $books = $wpdb->get_results(
-            "SELECT * FROM {$table} ORDER BY id DESC",
+        return $wpdb->get_results(
+            "SELECT * FROM {$table_name} ORDER BY id DESC",
             ARRAY_A
         );
-
-        return $books;
     }
-
 }
